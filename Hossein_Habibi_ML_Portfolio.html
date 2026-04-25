@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hossein Habibi — ML/AI Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070b12;
+    --bg2: #0d1420;
+    --bg3: #111827;
+    --card: #0f1a2a;
+    --card2: #13202f;
+    --cyan: #00e5d4;
+    --cyan2: #00c4b5;
+    --blue: #3b82f6;
+    --amber: #f59e0b;
+    --red: #ef4444;
+    --green: #10b981;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+    --border: rgba(0,229,212,0.12);
+    --border2: rgba(255,255,255,0.06);
+    --glow: 0 0 30px rgba(0,229,212,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── GRID NOISE BG ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,212,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,212,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(7,11,18,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border2);
+  }
+
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--cyan);
+    letter-spacing: 0.1em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--cyan); }
+
+  .nav-cta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: all 0.25s;
+    border-radius: 2px;
+  }
+
+  .nav-cta:hover {
+    background: var(--cyan);
+    color: var(--bg);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 3rem 5rem;
+    overflow: hidden;
+  }
+
+  .hero-orb {
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,212,0.07) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+
+  .hero-orb2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+    bottom: 50px; left: -100px;
+    pointer-events: none;
+  }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--cyan);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-label::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--cyan);
+  }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-name span {
+    color: var(--cyan);
+    font-style: italic;
+  }
+
+  .hero-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+    color: var(--text2);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-desc {
+    max-width: 620px;
+    font-size: 1.05rem;
+    color: var(--text2);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-desc strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .crisis-banner {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.25);
+    border-left: 3px solid var(--red);
+    padding: 1rem 1.4rem;
+    border-radius: 4px;
+    max-width: 680px;
+    margin-bottom: 3rem;
+  }
+
+  .crisis-icon { color: var(--red); flex-shrink: 0; font-size: 1rem; margin-top: 0.1rem; }
+
+  .crisis-text {
+    font-size: 0.88rem;
+    color: #fca5a5;
+    line-height: 1.65;
+  }
+
+  .crisis-text strong { color: #fecaca; font-weight: 500; }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    padding: 0.85rem 2rem;
+    background: var(--cyan);
+    color: var(--bg);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    border-radius: 2px;
+    transition: all 0.25s;
+    text-transform: uppercase;
+  }
+
+  .btn-primary:hover {
+    background: var(--cyan2);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(0,229,212,0.3);
+  }
+
+  .btn-secondary {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    padding: 0.85rem 2rem;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    border-radius: 2px;
+    transition: all 0.25s;
+    text-transform: uppercase;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border2);
+    flex-wrap: wrap;
+  }
+
+  .stat { }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    color: var(--cyan);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--cyan);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--cyan);
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    color: var(--text2);
+    font-size: 1rem;
+    max-width: 560px;
+    margin-bottom: 3.5rem;
+    line-height: 1.75;
+  }
+
+  /* ─── PROJECT CARDS ─── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--border2);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1.5px;
+  }
+
+  .projects-grid.wide {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    background: var(--card);
+    padding: 2.5rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--cyan);
+    transition: height 0.4s ease;
+  }
+
+  .project-card:hover::before { height: 100%; }
+  .project-card:hover { background: var(--card2); }
+
+  .project-card.featured {
+    grid-column: 1 / -1;
+    background: var(--card2);
+  }
+
+  .project-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+  }
+
+  .tag-flagship { background: rgba(0,229,212,0.1); color: var(--cyan); border: 1px solid rgba(0,229,212,0.2); }
+  .tag-nlp { background: rgba(59,130,246,0.1); color: #60a5fa; border: 1px solid rgba(59,130,246,0.2); }
+  .tag-dl { background: rgba(168,85,247,0.1); color: #c084fc; border: 1px solid rgba(168,85,247,0.2); }
+  .tag-rl { background: rgba(245,158,11,0.1); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+  .tag-ts { background: rgba(16,185,129,0.1); color: #34d399; border: 1px solid rgba(16,185,129,0.2); }
+  .tag-llm { background: rgba(239,68,68,0.1); color: #f87171; border: 1px solid rgba(239,68,68,0.2); }
+
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .project-subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--cyan);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--text2);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-desc strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ─── METRICS ─── */
+  .metrics-row {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .metric-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    min-width: 100px;
+  }
+
+  .metric-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--cyan);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+
+  .metric-lbl {
+    font-size: 0.65rem;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ─── ARCHITECTURE PHASES ─── */
+  .phase-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .phase-box {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 1.25rem;
+  }
+
+  .phase-box.phase1 { border-top: 2px solid var(--blue); }
+  .phase-box.phase2 { border-top: 2px solid var(--cyan); }
+
+  .phase-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+  }
+
+  .phase1 .phase-name { color: #60a5fa; }
+  .phase2 .phase-name { color: var(--cyan); }
+
+  .phase-desc {
+    font-size: 0.82rem;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  .phase-items {
+    margin-top: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .phase-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text3);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .phase-item::before {
+    content: '→';
+    color: var(--cyan);
+    flex-shrink: 0;
+  }
+
+  /* ─── TECH TAGS ─── */
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+  }
+
+  .tech-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.63rem;
+    padding: 0.25rem 0.6rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border2);
+    color: var(--text3);
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── SKILL RADAR ─── */
+  .skills-section {
+    background: var(--bg2);
+    border-top: 1px solid var(--border2);
+    border-bottom: 1px solid var(--border2);
+    padding: 6rem 3rem;
+  }
+
+  .skills-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-cat {
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 1.75rem;
+  }
+
+  .skill-cat-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--cyan);
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+  }
+
+  .skill-bar-row {
+    margin-bottom: 0.9rem;
+  }
+
+  .skill-bar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+  }
+
+  .skill-name { font-size: 0.82rem; color: var(--text); }
+  .skill-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text3);
+  }
+
+  .skill-track {
+    height: 3px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .skill-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--blue));
+    border-radius: 2px;
+    transition: width 1.5s ease;
+  }
+
+  /* ─── EXPERIENCE TIMELINE ─── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+    padding-left: 2rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 0.35rem;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan);
+    transform: translateX(-4px);
+  }
+
+  .tl-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--cyan);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.4rem;
+  }
+
+  .tl-role {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.15rem;
+  }
+
+  .tl-company {
+    font-size: 0.82rem;
+    color: var(--text3);
+    margin-bottom: 0.75rem;
+  }
+
+  .tl-points {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .tl-point {
+    font-size: 0.85rem;
+    color: var(--text2);
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .tl-point::before {
+    content: '·';
+    color: var(--cyan);
+    flex-shrink: 0;
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+
+  /* ─── CERTIFICATIONS ─── */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .cert-card {
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: border-color 0.25s;
+  }
+
+  .cert-card:hover { border-color: var(--border); }
+
+  .cert-icon {
+    width: 36px; height: 36px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+  }
+
+  .cert-icon.stanford { background: rgba(178,31,40,0.2); color: #e35d5b; }
+  .cert-icon.dc { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .cert-icon.aws { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .cert-icon.nokia { background: rgba(0,229,212,0.1); color: var(--cyan); }
+  .cert-icon.huawei { background: rgba(239,68,68,0.1); color: #f87171; }
+  .cert-icon.ucsc { background: rgba(16,185,129,0.1); color: #34d399; }
+
+  .cert-info { }
+  .cert-title { font-size: 0.83rem; font-weight: 500; color: var(--text); margin-bottom: 0.15rem; }
+  .cert-issuer { font-size: 0.72rem; color: var(--text3); }
+
+  /* ─── CONTACT ─── */
+  .contact-section {
+    background: var(--bg2);
+    border-top: 1px solid var(--border2);
+    padding: 6rem 3rem;
+    text-align: center;
+  }
+
+  .contact-inner { max-width: 680px; margin: 0 auto; }
+
+  .contact-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1.25rem 2rem;
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.25s;
+    min-width: 180px;
+  }
+
+  .contact-item:hover {
+    border-color: var(--cyan);
+    transform: translateY(-2px);
+  }
+
+  .contact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .contact-val { font-size: 0.88rem; color: var(--cyan); }
+
+  .open-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.25);
+    color: #34d399;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+
+  .pulse {
+    width: 7px; height: 7px;
+    background: #34d399;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── DIVIDERS ─── */
+  .full-divider {
+    height: 1px;
+    background: var(--border2);
+    max-width: none;
+  }
+
+  /* ─── FINDING ─── */
+  .finding-box {
+    background: rgba(59,130,246,0.06);
+    border: 1px solid rgba(59,130,246,0.18);
+    border-left: 3px solid var(--blue);
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+  }
+
+  .finding-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    color: #60a5fa;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .finding-text { font-size: 0.83rem; color: var(--text2); line-height: 1.65; }
+  .finding-text strong { color: var(--text); font-weight: 500; }
+
+  /* ─── ANIMATE ON SCROLL (simple) ─── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .phase-container { grid-template-columns: 1fr; }
+    .skills-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero-stats { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">HH.portfolio</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:hossein.habibi.20120@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+
+  <div class="hero-label">Available for Global Relocation · Visa Sponsorship Required</div>
+
+  <h1 class="hero-name">Hossein<br><span>Habibi</span></h1>
+  <div class="hero-title">Senior ML Engineer · 4G/5G RAN Optimization · Telecom AI Specialist</div>
+
+  <p class="hero-desc">
+    <strong>10+ years</strong> at the intersection of telecommunications and machine learning. I build production-grade ML systems that serve millions of mobile users — graph neural networks, deep learning, reinforcement learning, and LLM-based architectures. Specialized in telecom, with <strong>transferable expertise across any data-intensive domain</strong>.
+  </p>
+
+  <div class="crisis-banner">
+    <span class="crisis-icon">⚠</span>
+    <p class="crisis-text">
+      <strong>Note:</strong> I am writing this portfolio from Tehran, Iran, where ongoing regional conflict and repeated government internet shutdowns have made it impossible to continue my professional journey. I am actively seeking to relocate internationally and need visa sponsorship. If you have an opportunity that fits my profile, I would be deeply grateful for the connection.
+    </p>
+  </div>
+
+  <div class="hero-buttons">
+    <a href="#projects" class="btn-primary">View Projects</a>
+    <a href="mailto:hossein.habibi.20120@gmail.com" class="btn-secondary">Get In Touch</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Years in Telecom</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">+28%</div>
+      <div class="stat-label">Signal Quality Gain</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">82%</div>
+      <div class="stat-label">Model Accuracy</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6+</div>
+      <div class="stat-label">ML Projects in Production</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">&lt;2s</div>
+      <div class="stat-label">Inference · 1,088 Cells</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Portfolio</div>
+  <h2 class="section-title">ML Projects &amp;<br>Research Work</h2>
+  <p class="section-sub">Production systems and research projects spanning graph neural networks, reinforcement learning, deep learning, NLP, and LLM-based architectures — all built within real telecom infrastructure.</p>
+
+  <!-- PROJECT 1: FLAGSHIP -->
+  <div class="projects-grid wide fade-in" style="margin-bottom:1.5px;">
+    <div class="project-card featured">
+      <div class="project-tag tag-flagship">★ Flagship Project · In Production</div>
+      <h3 class="project-title">Two-Phase ML Network Optimization System</h3>
+      <div class="project-subtitle">Phase 1: Hybrid HGNN + XGBoost (Learning-to-Rank) → Phase 2: Multi-Head HGNN</div>
+
+      <p class="project-desc">
+        A city-scale, two-phase ML pipeline for <strong>automated 4G/5G RAN optimization</strong>. The system classifies network congestion, identifies the most suitable neighboring cells for offloading, and generates precise recommendations (azimuth, tilt, power adjustments) — all running in <strong>under 2 seconds for 1,088 cells</strong>. This is not a prototype; it is deployed in a live production network.
+      </p>
+
+      <div class="phase-container">
+        <div class="phase-box phase1">
+          <div class="phase-name">Phase 1 — Hybrid HGNN + XGBoost LTR</div>
+          <p class="phase-desc">Unsupervised graph learning feeds into supervised ranking.</p>
+          <div class="phase-items">
+            <div class="phase-item">GraphSAGE on cell+sector graph → 64-dim node embeddings</div>
+            <div class="phase-item">Feature engineering: embeddings + UDCLI + KPIs + handover %</div>
+            <div class="phase-item">XGBoost Learning-to-Rank (LTR) · Pairwise/Listwise · NDCG objective</div>
+            <div class="phase-item">Custom UDCLI metric: load vs. capacity with MIMO/BLER correction</div>
+            <div class="phase-item">NBR Suitability Score = Weight% / UDCLI → ranked offload candidates</div>
+            <div class="phase-item">NDCG@10: 0.87 · MRR: 0.82 · Precision@5: 0.79</div>
+          </div>
+        </div>
+        <div class="phase-box phase2">
+          <div class="phase-name">Phase 2 — Multi-Head HGNN (Behavior Cloning)</div>
+          <p class="phase-desc">Transfer learning from Phase 1 initializes supervised prediction heads.</p>
+          <div class="phase-items">
+            <div class="phase-item">Shared GNN encoder (4× GraphSAGE layers + Phase 1 embeddings)</div>
+            <div class="phase-item">Head 1: Action Type — Azimuth / Tilt / CID (85% accuracy)</div>
+            <div class="phase-item">Head 2: Magnitude — ±1, ±2, ±3 adjustment (MAE: 1.2 units)</div>
+            <div class="phase-item">Head 3: Target Cell — uses Phase 1 rankings (78% accuracy)</div>
+            <div class="phase-item">Transfer learning → 40% faster convergence in Phase 2</div>
+            <div class="phase-item">Overall: 82% accuracy · Inference: &lt;2 sec / 1,088 cells</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-pill"><div class="metric-val">+28.3%</div><div class="metric-lbl">RSRP Gain</div></div>
+        <div class="metric-pill"><div class="metric-val">+13.8%</div><div class="metric-lbl">DL Throughput</div></div>
+        <div class="metric-pill"><div class="metric-val">+17.6%</div><div class="metric-lbl">CQI Gain</div></div>
+        <div class="metric-pill"><div class="metric-val">0.87</div><div class="metric-lbl">NDCG@10</div></div>
+        <div class="metric-pill"><div class="metric-val">82%</div><div class="metric-lbl">Phase 2 Accuracy</div></div>
+        <div class="metric-pill"><div class="metric-val">&lt;2s</div><div class="metric-lbl">Inference Time</div></div>
+      </div>
+
+      <div class="tech-tags">
+        <span class="tech-tag">PyTorch</span><span class="tech-tag">GraphSAGE</span><span class="tech-tag">GNN</span>
+        <span class="tech-tag">XGBoost LTR</span><span class="tech-tag">NDCG Optimization</span><span class="tech-tag">Transfer Learning</span>
+        <span class="tech-tag">Behavior Cloning</span><span class="tech-tag">Feature Engineering</span><span class="tech-tag">NumPy</span>
+        <span class="tech-tag">Pandas</span><span class="tech-tag">MTN-IRANCELL Production</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="projects-grid fade-in" style="margin-bottom:1.5px;">
+
+    <!-- PROJECT 2: RAG -->
+    <div class="project-card">
+      <div class="project-tag tag-llm">🔴 Ongoing · LLM + RAG</div>
+      <h3 class="project-title">Hybrid RAG Architecture for LTE Networks</h3>
+      <div class="project-subtitle">Retrieval-Augmented Generation · Telecom Knowledge Engine</div>
+
+      <p class="project-desc">
+        Designing an <strong>LLM-powered decision-support system</strong> tailored to telecom network data. The pipeline ingests structured KPI tables, unstructured engineer logs, and domain-specific documentation into a hybrid retrieval index — enabling intelligent question answering, root cause diagnosis, and optimization recommendations via natural language.
+      </p>
+
+      <div class="finding-box">
+        <div class="finding-label">Architecture Overview</div>
+        <p class="finding-text">
+          <strong>Hybrid indexing:</strong> Dense vector retrieval (FAISS) over embedded log narratives + sparse BM25 over structured KPIs. A re-ranker fuses both signals before passing context to an LLM fine-tuned on telecom domain vocabulary. Designed as an intelligent layer over the Phase 1/2 optimization system.
+        </p>
+      </div>
+
+      <div class="tech-tags">
+        <span class="tech-tag">RAG</span><span class="tech-tag">FAISS</span><span class="tech-tag">BM25</span>
+        <span class="tech-tag">LLM Fine-tuning</span><span class="tech-tag">LangChain</span><span class="tech-tag">Vector DB</span>
+        <span class="tech-tag">Telecom NLP</span><span class="tech-tag">Re-ranking</span>
+      </div>
+    </div>
+
+    <!-- PROJECT 3: LSTM -->
+    <div class="project-card">
+      <div class="project-tag tag-dl">Deep Learning · Time-Series</div>
+      <h3 class="project-title">LSTM + Enriched Attention for Event-Driven Traffic Prediction</h3>
+      <div class="project-subtitle">Deployed at MTN-IRANCELL · 25% Complaint Reduction</div>
+
+      <p class="project-desc">
+        A production deep learning model that <strong>forecasts network congestion surges</strong> before major public events (sports, concerts, national holidays). An enriched self-attention mechanism over LSTM hidden states learns which temporal contexts are most predictive of surges — enabling proactive capacity allocation days in advance.
+      </p>
+
+      <div class="metrics-row">
+        <div class="metric-pill"><div class="metric-val">−25%</div><div class="metric-lbl">Complaints Reduced</div></div>
+        <div class="metric-pill"><div class="metric-val">Multi-day</div><div class="metric-lbl">Forecast Horizon</div></div>
+      </div>
+
+      <div class="tech-tags">
+        <span class="tech-tag">LSTM</span><span class="tech-tag">Attention Mechanism</span><span class="tech-tag">PyTorch</span>
+        <span class="tech-tag">Time-Series</span><span class="tech-tag">Event Detection</span><span class="tech-tag">Anomaly Detection</span>
+        <span class="tech-tag">Production Deployed</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3 -->
+  <div class="projects-grid fade-in" style="margin-bottom:1.5px;">
+
+    <!-- PROJECT 4: TT Analysis -->
+    <div class="project-card">
+      <div class="project-tag tag-nlp">NLP · Classification · Analytics</div>
+      <h3 class="project-title">Network Trouble Ticket Classification &amp; Anomaly Detection</h3>
+      <div class="project-subtitle">Operational Intelligence for NOC Teams · City-Scale Network</div>
+
+      <p class="project-desc">
+        An end-to-end ML pipeline applied to <strong>real telecom trouble ticket (TT) data</strong> across hundreds of sites. The analysis revealed that <strong>98%+ of repetitive tickets</strong> originate from automated network surveillance systems generating false positives — drowning real operational issues. Key findings surfaced through classification, clustering, and duration analysis.
+      </p>
+
+      <div class="finding-box">
+        <div class="finding-label">Key Findings from Real Data</div>
+        <p class="finding-text">
+          <strong>127 critical sites</strong> generated 570 tickets (3% of sites = 10% of total volume). TCH/TCHA issues account for <strong>55%+ of all tickets</strong> across 70% of unique sites. Sites like T2863 and T6667 each exceeded 400 repetitive tickets, indicating unresolved root causes masked by alert noise. Region R6 showed highest average ticket duration; R7 had highest volume. Handler bottleneck identified: only 3 groups processed the majority of tickets.
+        </p>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-pill"><div class="metric-val">127</div><div class="metric-lbl">Critical Sites</div></div>
+        <div class="metric-pill"><div class="metric-val">98%+</div><div class="metric-lbl">Attributed to Surveillance</div></div>
+        <div class="metric-pill"><div class="metric-val">55%</div><div class="metric-lbl">TCHA Dominance</div></div>
+      </div>
+
+      <div class="tech-tags">
+        <span class="tech-tag">NLP Classification</span><span class="tech-tag">Clustering</span><span class="tech-tag">Anomaly Detection</span>
+        <span class="tech-tag">Pandas</span><span class="tech-tag">Scikit-learn</span><span class="tech-tag">Root Cause Analysis</span>
+        <span class="tech-tag">Operational Analytics</span>
+      </div>
+    </div>
+
+    <!-- PROJECT 5: ENERGY SAVING RL -->
+    <div class="project-card">
+      <div class="project-tag tag-rl">Reinforcement Learning · Energy</div>
+      <h3 class="project-title">Energy-Saving RAN via Carrier Management with Reinforcement Learning</h3>
+      <div class="project-subtitle">Q-Learning Agent · Huawei RAN · Dynamic Sleep Mode</div>
+
+      <p class="project-desc">
+        A <strong>Q-learning RL agent</strong> that dynamically decides whether to keep or shut down sector carriers based on real-time user count. Trained over 1,000 episodes in a simulated RAN environment, the agent learns an optimal policy that maximizes energy savings while protecting network performance — turning off carriers only when fewer than 10 users are connected.
+      </p>
+
+      <div class="finding-box">
+        <div class="finding-label">System Design</div>
+        <p class="finding-text">
+          <strong>State space:</strong> 0–100 users per sector. <strong>Actions:</strong> keep carrier ON or switch OFF. <strong>Reward function:</strong> positive for energy-saving shutdowns under low load; negative for shutdowns during high demand. Epsilon-greedy exploration strategy. At 50 users: agent selects "keep on" with Q-value +5.2, demonstrating learned performance-aware policy.
+        </p>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-pill"><div class="metric-val">1,000</div><div class="metric-lbl">Training Episodes</div></div>
+        <div class="metric-pill"><div class="metric-val">Dynamic</div><div class="metric-lbl">Sleep-Mode Policy</div></div>
+      </div>
+
+      <div class="tech-tags">
+        <span class="tech-tag">Reinforcement Learning</span><span class="tech-tag">Q-Learning</span><span class="tech-tag">Epsilon-Greedy</span>
+        <span class="tech-tag">Huawei RAN</span><span class="tech-tag">Energy Optimization</span><span class="tech-tag">Python</span>
+        <span class="tech-tag">Simulation Environment</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT 6: TIME-SERIES PAYLOAD -->
+  <div class="projects-grid wide fade-in">
+    <div class="project-card">
+      <div class="project-tag tag-ts">Time-Series Forecasting · Capacity Planning</div>
+      <h3 class="project-title">Payload Traffic Prediction for Network Capacity Planning</h3>
+      <div class="project-subtitle">Cell-Level DL/UL Traffic Forecasting · Proactive Resource Allocation</div>
+
+      <p class="project-desc">
+        A multi-horizon time-series forecasting system predicting <strong>downlink and uplink traffic volume</strong> at individual cell level. Enables the network operations team to anticipate capacity needs days and weeks ahead, optimize spectrum allocation proactively, and reduce reactive interventions. Combines classical decomposition (trend/seasonality) with deep learning sequence models to achieve accurate short and medium-term forecasts under irregular traffic patterns.
+      </p>
+
+      <div class="metrics-row">
+        <div class="metric-pill"><div class="metric-val">Cell-level</div><div class="metric-lbl">Granularity</div></div>
+        <div class="metric-pill"><div class="metric-val">DL + UL</div><div class="metric-lbl">Traffic Predicted</div></div>
+        <div class="metric-pill"><div class="metric-val">Proactive</div><div class="metric-lbl">Capacity Planning</div></div>
+      </div>
+
+      <div class="tech-tags">
+        <span class="tech-tag">Time-Series Analysis</span><span class="tech-tag">LSTM</span><span class="tech-tag">Seasonal Decomposition</span>
+        <span class="tech-tag">Pandas</span><span class="tech-tag">Prophet / ARIMA</span><span class="tech-tag">Feature Engineering</span>
+        <span class="tech-tag">Capacity Management</span><span class="tech-tag">NumPy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div class="skills-section" id="skills">
+  <div class="skills-inner">
+    <div class="section-label">Technical Stack</div>
+    <h2 class="section-title">Skills &amp; Capabilities</h2>
+    <p class="section-sub">Deep expertise built across 10+ years of production engineering. Telecom is my home domain — but the ML skills transfer universally.</p>
+
+    <div class="skills-grid fade-in">
+      <div class="skill-cat">
+        <div class="skill-cat-title">Machine Learning &amp; AI</div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">Graph Neural Networks (GNN/HGNN)</span><span class="skill-pct">95%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:95%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">Deep Learning (LSTM, Attention, CNN)</span><span class="skill-pct">92%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:92%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">Reinforcement Learning</span><span class="skill-pct">82%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:82%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">XGBoost / Ensemble Methods</span><span class="skill-pct">90%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">NLP / Text Classification</span><span class="skill-pct">80%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">LLM / RAG Architecture</span><span class="skill-pct">75%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:75%"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <div class="skill-cat-title">Programming &amp; Data</div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">Python (PyTorch, TF, Sklearn)</span><span class="skill-pct">95%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:95%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">Pandas / NumPy / SQL</span><span class="skill-pct">93%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:93%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">MATLAB</span><span class="skill-pct">78%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:78%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">ETL Pipelines / Spark</span><span class="skill-pct">80%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">AWS / GCP / Docker / K8s</span><span class="skill-pct">78%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:78%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">Feature Engineering</span><span class="skill-pct">93%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:93%"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <div class="skill-cat-title">Telecom Domain Expertise</div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">4G LTE / 5G NR Architecture</span><span class="skill-pct">97%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:97%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">RAN Optimization (KPI/NPO)</span><span class="skill-pct">96%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:96%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">Network Capacity Planning</span><span class="skill-pct">88%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:88%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">Huawei / Nokia / Ericsson Tools</span><span class="skill-pct">90%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">Atoll / TEMS / MapInfo / NetAct</span><span class="skill-pct">87%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:87%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-top"><span class="skill-name">Drive Testing &amp; Root Cause Analysis</span><span class="skill-pct">93%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:93%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOMAIN TRANSFER BOX -->
+    <div style="margin-top:2.5rem; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:2rem 2.5rem;" class="fade-in">
+      <div class="section-label" style="margin-bottom:0.75rem;">Domain Transferability</div>
+      <h3 style="font-family:'DM Serif Display',serif; font-size:1.4rem; margin-bottom:1rem;">Telecom-trained. Universally applicable.</h3>
+      <p style="font-size:0.9rem; color:var(--text2); line-height:1.8; max-width:780px;">
+        The ML techniques I have mastered in telecom — <strong style="color:var(--text)">graph neural networks on infrastructure topology, time-series forecasting on high-frequency sensor data, reinforcement learning for resource optimization, anomaly detection on operational logs, and LLM-based knowledge retrieval</strong> — are directly applicable to <strong style="color:var(--text)">smart grids, logistics networks, healthcare monitoring, financial risk, IoT platforms, industrial automation, and any other domain with structured relational data and time-series signals</strong>. The physics changes; the mathematics does not.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Career</div>
+  <h2 class="section-title">Professional Experience</h2>
+  <p class="section-sub" style="margin-bottom:3rem;">10+ years across operators and vendors, from drive testing to production ML systems.</p>
+
+  <div class="timeline fade-in">
+    <div class="timeline-item">
+      <div class="tl-date">2020 — Present</div>
+      <div class="tl-role">Senior 4G/5G RAN Optimization &amp; ML Engineer</div>
+      <div class="tl-company">MTN-IRANCELL · Tehran, Iran</div>
+      <div class="tl-points">
+        <div class="tl-point">Architected and deployed the two-phase HGNN + XGBoost production ML system for city-scale network optimization, achieving +28.3% RSRP and +13.8% throughput improvement</div>
+        <div class="tl-point">Built LSTM + Attention model for event-driven traffic surge prediction — reduced user complaints by 25%</div>
+        <div class="tl-point">Designed RL-based energy saving system using Q-learning for dynamic carrier sleep mode policies</div>
+        <div class="tl-point">Developed NLP pipeline for trouble ticket classification and anomaly detection across 500+ network sites</div>
+        <div class="tl-point">Initiated Hybrid RAG Architecture for LTE (ongoing) to bring LLM-based intelligence to network operations</div>
+        <div class="tl-point">Led macro-level network optimization strategies earning the MTN Highlight Award for innovation</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-date">2016 — 2020</div>
+      <div class="tl-role">RAN Optimization Engineer</div>
+      <div class="tl-company">Huawei · Tehran, Iran</div>
+      <div class="tl-points">
+        <div class="tl-point">3G/4G Radio Optimization in the Network Performance Optimization (NPO) Division</div>
+        <div class="tl-point">RNC, BSC, IUPS troubleshooting and SW upgrade / re-homing activities</div>
+        <div class="tl-point">Regional owner for Tehran City in the MTN modernization project</div>
+        <div class="tl-point">Trained interns in network KPI improvement and root cause investigation methodology</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-date">2015 — 2016</div>
+      <div class="tl-role">Pre-Optimization Engineer</div>
+      <div class="tl-company">QTS · Tehran, Iran</div>
+      <div class="tl-points">
+        <div class="tl-point">Pre-optimization projects for Nokia and Ericsson network deployments</div>
+        <div class="tl-point">Drive test result analysis and pertinent optimization measure formulation</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-date">2014 — 2015</div>
+      <div class="tl-role">Research Engineer</div>
+      <div class="tl-company">Marine Industries · Tehran, Iran</div>
+      <div class="tl-points">
+        <div class="tl-point">R&amp;D work on passive defense strategies against EMP using CST simulation and multi-objective optimization</div>
+        <div class="tl-point">M.Sc. thesis: advanced signal propagation and interference modeling</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div class="section-label" style="margin-top:4rem;">Certifications</div>
+  <h3 style="font-family:'DM Serif Display',serif; font-size:1.6rem; margin-bottom:0.5rem;">Continuous Learning</h3>
+  <p style="color:var(--text2); font-size:0.88rem; margin-bottom:0;">Academic IELTS 6.5 Overall (L7, R7, S6.5, W6) — Fluent English</p>
+
+  <div class="certs-grid fade-in">
+    <div class="cert-card">
+      <div class="cert-icon stanford">SU</div>
+      <div class="cert-info">
+        <div class="cert-title">Advanced Learning Algorithms</div>
+        <div class="cert-issuer">Stanford University · 2024</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon stanford">SU</div>
+      <div class="cert-info">
+        <div class="cert-title">Supervised ML: Regression &amp; Classification</div>
+        <div class="cert-issuer">Stanford University · 2024</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon dc">DC</div>
+      <div class="cert-info">
+        <div class="cert-title">Supervised Learning with Scikit-learn</div>
+        <div class="cert-issuer">Datacamp · 2024</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon ucsc">UC</div>
+      <div class="cert-info">
+        <div class="cert-title">Cyber-Physical Systems: Modeling &amp; Simulation</div>
+        <div class="cert-issuer">University of California, Santa Cruz · 2023</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon nokia">NK</div>
+      <div class="cert-info">
+        <div class="cert-title">5G NR Air Interface</div>
+        <div class="cert-issuer">Nokia · 2021</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon huawei">HW</div>
+      <div class="cert-info">
+        <div class="cert-title">5G Radio Network Optimization</div>
+        <div class="cert-issuer">Huawei · 2025</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon aws">AWS</div>
+      <div class="cert-info">
+        <div class="cert-title">ML Engineer Associate (In Progress)</div>
+        <div class="cert-issuer">Amazon Web Services</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon dc">SL</div>
+      <div class="cert-info">
+        <div class="cert-title">Python for Data Science</div>
+        <div class="cert-issuer">SoloLearn · 2022</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="open-badge">
+      <div class="pulse"></div>
+      Open to Work · Seeking International Relocation
+    </div>
+    <h2 style="font-family:'DM Serif Display',serif; font-size:clamp(2rem,4vw,2.8rem); margin-bottom:1rem; letter-spacing:-0.02em;">Let's Build Something<br><span style="color:var(--cyan); font-style:italic;">Together</span></h2>
+    <p style="color:var(--text2); font-size:0.95rem; line-height:1.8; margin-bottom:0.5rem;">
+      I am ready to bring 10 years of telecom ML expertise to your team — anywhere in the world. If you have a role in ML engineering, data science, network AI, or telecom automation, I would love to connect. Visa sponsorship is required.
+    </p>
+    <p style="color:var(--text3); font-size:0.82rem; margin-bottom:2rem;">
+      Due to internet restrictions in Iran, email is the most reliable channel. I aim to respond within 48 hours.
+    </p>
+    <div class="contact-grid">
+      <a href="mailto:hossein.habibi.20120@gmail.com" class="contact-item">
+        <span class="contact-label">Email</span>
+        <span class="contact-val">hossein.habibi.20120@gmail.com</span>
+      </a>
+      <div class="contact-item">
+        <span class="contact-label">Phone / WhatsApp</span>
+        <span class="contact-val">+98 935-2004156</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Location</span>
+        <span class="contact-val">Tehran, Iran → Anywhere</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Hossein Habibi · Senior ML Engineer · 4G/5G RAN Optimization · Built 2025
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Skill bar animation
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-fill').forEach(bar => {
+          bar.style.width = bar.style.width; // trigger reflow
+        });
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.skill-cat').forEach(el => skillObserver.observe(el));
+</script>
+
+</body>
+</html>
